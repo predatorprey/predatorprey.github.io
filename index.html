@@ -1,20 +1,199 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script src="epoch.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="epoch.min.css">
-  <script src="main.js"></script>
-  <link rel="stylesheet" href="style.css">
-  <style>
-  #myChart .predators .line {
-  color: pink;
-}
-</style>
-</head>
-<body>
-  <div id="myChart" class="epoch category10" style="width: 800px; height: 200px; position: absolute;"></div>
-  <canvas id="sim"></canvas>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Predator-Prey Systems</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="d3.v3.min.js"></script>
+    <script type="text/javascript" src="epoch.min.js"></script>
+    <script src="http://dreasgrech.com/upload/jslatex/jquery.jslatex.packed.js"></script>
+    <script>
+$(function () {
+    $(".latex").latex();
+});
+</script>
+    <link rel="stylesheet" type="text/css" href="epoch.min.css">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">A.J. Uppal | Ian Conceicao<br>Duncan Koblas | Charlie Hood</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">Description</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#download">Simulation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Mathematics</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h1 class="brand-heading" >Predator-Prey Systems</h1>
+              <p class="intro-text">The what, how, and why of predator-prey systems.
+                <br>Created by a team of intellectuals<sup>TM</sup></p>
+              <a href="#about" class="btn btn-circle js-scroll-trigger">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="content-section text-center" style="box-shadow: inset 0px 40px 40px -20px #000; background-image: url(http://wildlife.org/wp-content/uploads/2015/09/Conservation-prey-and-predators-1-Amoury-Laporte.jpg);">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Lotka-Volterra Equations</h2>
+            <p>The Lotka–Volterra equations, also known as the predator–prey equations, are a pair of first-order nonlinear differential equations, frequently used to describe the dynamics of biological systems in which two species interact, one as a predator and the other as prey.</p>
+            <p>These equations, proposed anachronistically by Alfred J. Lotka and Vito Volterra, may be applied generally to model a single predator-prey relationship.
+            </p>
+            <!-- <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with SASS and LESS files for easy customization!</p> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section content-section text-center" style="background-color:white">
+      <h2 style="color:black">Simulation</h2>
+      <div class="container" style="/*margin-left: 0px;*/">
+        <div class="col-lg-8 mx-auto" style="/*margin-left: 0px;*/">
+
+          <div id="myChart" class="epoch category10" style="width: 800px; height: 200px; position: absolute;"></div>
+          <div id="canvasContainer" class="mx-auto" style="background-color:black;box-shadow: inset 0 0 10px 10px;padding: 25px;">
+          <canvas id="sim" style="background-color:black"></canvas>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <h2 style="color:black">Assumptions</h2>
+        <ol style="color:black;text-align:left">
+  <li>The prey population finds ample food at all times.</li>
+  <li>The food supply of the predator population depends entirely on the size of the prey population.</li>
+  <li>The rate of change of population is proportional to its size.</li>
+  <li>During the process, the environment does not change in favor of one species, and genetic adaptation is inconsequential.</li>
+  <li>Predators have limitless appetite.</li>
+</ol>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto" style="margin-top:-100px">
+            <h1>Mathematics</h1>
+            <h2>Graphical Analysis</h2>
+            <p>Theoretically, the relationship between the predator and prey is modeled as follows:
+              <img style="width: 100%" src="LotkaVolterra_en.svg.png">
+
+              <h2>Equations</h2>
+              <p>The linear differential equations that model the aforementioned relationship may be described as follows:</p>
+
+              <div class="fraction" style="color:#7ba254">
+    <span class="fup mathfont">dx</span>
+    <span class="bar mathfont">/</span>
+    <span class="fdn mathfont">dt</span>
+  </div>
+
+  <p class="mathfont">=<span style="color:#7ba254">&alpha;x</span>-<span style="color:#7ba254">&beta;xy</span></p>
+<!-- <span> -->
+  <div class="fraction" style="padding-left:5em;color:#e06667">
+<span class="fup mathfont">dy</span>
+<span class="bar mathfont">/</span>
+<span class="fdn mathfont">dt</span>
+</div>
+
+<p class="mathfont">=<span style="color:#e06667">&delta;x</span>-<span style="color:#e06667">&gamma;xy</span></p>
+<br>
+<div class="fraction" style="font-size:16px;">
+<span style="display:inline-block;padding-left:10%;"><span class="mathfont" style="color:#7ba254">x</span> is the number of prey</span>
+<span style="padding-left:5em; display:inline-block"><span class="mathfont" style="color:#e06667">y</span> is the number of some predator</span>
+<br>
+<div class="fraction" style="color:#7ba254">
+<span class="fup mathfont">dy</span>
+<span class="bar mathfont">/</span>
+<span class="fdn mathfont">dt</span>
+</div> and <div class="fraction" style="color:#e06667">
+<span class="fup mathfont">dx</span>
+<span class="bar mathfont">/</span>
+<span class="fdn mathfont">dt</span>
+</div> represent the instantaneous growth rates of the two populations<br>
+<span class="mathfont" style="display:inline-block">t</span> represents time<br><br>
+<span class="mathfont" style="display:inline-block"><span style="color:#7ba254">&alpha;</span>, <span style="color:#7ba254">&beta;</span>, <span style="color:#e06667">&delta;</span>, <span style="color:#e06667">&gamma;</span></span> are positive real parameters describing the interaction of the two species.</span></div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <
+
+    <!-- Footer -->
+    <hr>
+    <footer style="background-color: #7ba254">
+      <div class="container text-center">
+        <p>Copyright &copy; AJ Uppal Web Design 2018</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/grayscale.min.js"></script>
+
+  </body>
+
 </html>

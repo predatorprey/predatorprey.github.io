@@ -2,8 +2,8 @@ $(document).ready(function(){
 
   var sim_canvas = document.getElementById("sim");
   var sim_ctx = sim_canvas.getContext('2d');
-  sim_canvas.width = window.innerWidth;
-  sim_canvas.height = window.innerHeight;
+  sim_canvas.width = window.innerWidth*0.25;
+  sim_canvas.height = window.innerHeight*0.75;
   var preys = [];
   var predators = [];
   var trail_len = 2;
@@ -136,29 +136,29 @@ $(document).ready(function(){
   for(var b = 0; b<20; b++){
     predators.push(new Predator(null, null));
   }
-  var myChart =  $('#myChart').epoch({
-    type: 'time.line',
-    fps: 24,
-    data: [
-      {
-        label: "preys",
-        values: [{time: 0, y: preys.length}],
-        color: "red"
-
-      },
-      {
-        label: "predators",
-        values: [{time: 0, y: predators.length}],
-        color: "green"
-      }
-    ]
-  });
+  // var myChart =  $('#myChart').epoch({
+  //   type: 'time.line',
+  //   fps: 24,
+  //   data: [
+  //     {
+  //       label: "preys",
+  //       values: [{time: 0, y: preys.length}],
+  //       color: "red"
+  //
+  //     },
+  //     {
+  //       label: "predators",
+  //       values: [{time: 0, y: predators.length}],
+  //       color: "green"
+  //     }
+  //   ]
+  // });
   function update(){
 	sim_ctx.clearRect(0, 0, sim_canvas.width, sim_canvas.height);
   if(new Date() - timer > 1){
     // debugger;
-    myChart.push(nextDataPoint(preys.length, predators.length, (new Date()-startTime)));
-    console.log(preys.length, predators.length);
+    // myChart.push(nextDataPoint(preys.length, predators.length, (new Date()-startTime)));
+    // console.log(preys.length, predators.length);
     timer = new Date();
   }
 
