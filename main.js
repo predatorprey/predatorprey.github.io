@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   var sim_canvas = document.getElementById("sim");
   var sim_ctx = sim_canvas.getContext('2d');
-  sim_canvas.width = window.innerWidth*0.25;
+  sim_canvas.width = window.innerWidth*0.4;
   sim_canvas.height = window.innerHeight*0.75;
   var preys = [];
   var predators = [];
@@ -16,7 +16,7 @@ $(document).ready(function(){
   var preyVars = {
     spawnFactor: 2,
     clusterFactor: 0.5,
-    randomSpawnFactor: 0.001
+    randomSpawnFactor: 0.01
   }
   var predatorVars = {
     deathFactor: 0.9,
